@@ -38,3 +38,6 @@ The chatbot is designed to sit inside a “Manage My Bills” portal page and he
 │   └── billing_notes.txt   # Internal billing/insurance notes for retrieval
 ├── requirements.txt        # Python dependencies
 └── .gitignore              # Ignores venv, cache, .env, etc.
+
+
+Built by Team B — Nishit Mistry (PM), Atharva Sathaye, Akshay Wagh, Jasmitha Duvvuru, Juhi Khare. Special thanks to Salud Revenue Partners for domain guidance.
