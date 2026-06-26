@@ -93,7 +93,7 @@ def build_mock_bills_summary() -> str:
 # FastAPI app, templates, static
 # ----------------------------------------------------
 app = FastAPI(
-    title="Salud Billing Helper Demo",
+    title="Billing Helper Demo",
     description="Prototype for billing/insurance education in a mock portal.",
     version="0.1.0",
 )
@@ -274,7 +274,7 @@ def chat_endpoint(req: ChatRequest):
     system_prompt = f"""
 You are a patient-friendly billing and insurance assistant for a health system.
 
-This is a MOCK demo portal for the Salud / ABR class project. You can "see" only the mock bills below:
+This is a MOCK demo portal for a billing assistant class project. You can "see" only the mock bills below:
 
 {mock_bills_text}
 

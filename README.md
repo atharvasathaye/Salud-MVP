@@ -1,43 +1,45 @@
-# Salud-MVP (Billing Assistant Demo)
+# Billing Assistant MVP
 
-This repository contains a small working prototype of a patient-friendly billing and insurance assistant for a revenue cycle / billing company.
+A patient-facing billing and insurance chatbot prototype built with FastAPI and OpenAI. Designed to help patients understand medical bills, insurance terminology, and portal navigation.
 
-The chatbot is designed to sit inside a “Manage My Bills” portal page and help patients understand:
+## Background
 
-- What they (mock) owe
-- Basic insurance concepts (deductible, copay, coinsurance, etc.)
-- What to do next and where to go in the portal
-- Without ever touching real PHI/PII or live account data
+Patients often struggle to understand medical billing. This prototype demonstrates an LLM-powered assistant that can answer questions about bills, explain insurance concepts (deductible, copay, coinsurance), and guide users through a mock billing portal. All data shown is synthetic. No real patient data is used.
 
-## Key features
+## How It Works
 
-- Simple FastAPI backend with a chat endpoint
-- Jinja2 templates for the pre-login page and the mock “Manage My Bills” page
-- LLM-powered assistant using the OpenAI API
-- Lightweight retrieval over a local `billing_notes.txt` file for insurance definitions
-- Mock bills table wired into the assistant prompt so it can answer questions like  
-  “What is my total balance?” or “What is the status of ACC-1002?”
+1. The FastAPI backend serves a mock billing portal with sample patient accounts
+2. When a patient asks a question, the system routes it through an intent classifier
+3. A RAG pipeline retrieves relevant billing/insurance definitions from a local knowledge base
+4. The LLM generates a response at a 4th-6th grade reading level using only the mock data
+5. PHI protection detects and blocks messages containing account numbers, SSNs, or personal identifiers
 
-## Tech stack
+## Setup
 
-- Python 3.11
-- FastAPI + Uvicorn
-- Jinja2 templates
-- OpenAI API (chat + embeddings)
-- `python-dotenv` for environment variables
+```bash
+git clone https://github.com/atharvasathaye/Salud-MVP.git
+cd Salud-MVP
+python -m venv .venv
+.venv/Scripts/activate
+pip install -r requirements.txt
 
-## Project structure
+# Add your OpenAI API key
+echo "OPENAI_API_KEY=sk-your-key-here" > .env
 
-```text
-.
-├── main.py                 # FastAPI app, chat endpoint, mock bills logic, RAG
-├── templates/
-│   ├── salud_site.html     # Pre-login landing page with chatbot
-│   └── manage.html         # Mock Manage My Bills page, bills table, chatbot widget
-├── knowledge/
-│   └── billing_notes.txt   # Internal billing/insurance notes for retrieval
-├── requirements.txt        # Python dependencies
-└── .gitignore              # Ignores venv, cache, .env, etc.
+# Run
+uvicorn main:app --reload --port 8000
+```
 
+Requires Python 3.11+ and an OpenAI API key.
 
-Built by Team B — Nishit Mistry (PM), Atharva Sathaye, Akshay Wagh, Jasmitha Duvvuru, Juhi Khare. Special thanks to Salud Revenue Partners for domain guidance.
+## Tech Stack
+
+Python 3.11, FastAPI, OpenAI API (GPT-4o-mini, text-embedding-3-small), Jinja2, Pydantic
+
+## Collaborators
+
+Built as a team project: Nishit Mistry (PM), Atharva Sathaye, Akshay Wagh, Jasmitha Duvvuru, Juhi Khare.
+
+## License
+
+MIT
